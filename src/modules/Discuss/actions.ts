@@ -1,4 +1,5 @@
 import { ArticleType } from "types/types";
+import { getUrl } from "config/proxy";
 
 export const FetchArticleStart = "DISCUSS::FETCH_ARTICLE_START";
 export const ReceiveArticle = "DISCUSS::RECEIVE_ARTICLE";
@@ -33,8 +34,9 @@ export const getComments = (
   }
 
   kids.forEach((id: number) => {
-    return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then(
-      res =>
+    return fetch(
+      getUrl(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+    ).then(res =>
         res.json().then(result => {
           commentsObject[id] = result;
           if (result && result.kids) {
@@ -50,7 +52,7 @@ export const getComments = (
 
 export const fetchArticleForDiscussPage = (id: number) => dispatch => {
   dispatch(fetchArticleStart());
-  return fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+  return fetch(getUrl(`https://hacker-news.firebaseio.com/v0/item/${id}.json`))
     .then(res => res.json())
     .then((result: ArticleType) => {
       if (result && result.kids) {

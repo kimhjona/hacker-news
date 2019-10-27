@@ -1,4 +1,5 @@
 import { ArticleType } from "types/types";
+import { getUrl } from "config/proxy";
 
 export const GetList = "HOMEPAGE::GET_LIST";
 export const ReceiveList = "HOMEPAGE::RECEIVE_LIST";
@@ -51,7 +52,7 @@ export const fetchArticlesData = () => (dispatch, getState) => {
   const articles: ArticleType[] = [];
   dispatch(requestArticles());
   list.slice(currentIndex, currentIndex + counter).map(number =>
-    fetch(`https://hacker-news.firebaseio.com/v0/item/${number}.json`)
+    fetch(getUrl(`https://hacker-news.firebaseio.com/v0/item/${number}.json`))
       .then(res => res.json())
       .then(result => {
         articles.push(result);
@@ -64,7 +65,7 @@ export const fetchArticlesData = () => (dispatch, getState) => {
 
 export const fetchArticles = (sortBy: string) => dispatch => {
   dispatch(requestList());
-  return fetch(`https://hacker-news.firebaseio.com/v0/${sortBy}.json`)
+  return fetch(getUrl(`https://hacker-news.firebaseio.com/v0/${sortBy}.json`))
     .then(res => res.json())
     .then(result => {
       dispatch(receiveList({ json: result }));

@@ -18,7 +18,7 @@ export class Discussion extends React.Component<DiscussionType> {
         {article.id &&
           kids &&
           childrenCommentsArray &&
-          childrenCommentsArray(comments, kids).map(comment => {
+          Object.values(comments).map(comment => {
             return (
               <CommentContainer
                 comments={comments}
