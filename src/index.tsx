@@ -4,7 +4,7 @@ import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import * as serviceWorker from "serviceWorker";
 import "styles/app.css";
 import { rootReducer } from "rootReducer";
@@ -21,7 +21,7 @@ const store = createStore(
 const App: React.FC = () => {
   return (
     <Provider store={store}>
-      <Router basename="/hacker-news">
+      <Router basename="/">
         <RouteContainer />
       </Router>
     </Provider>

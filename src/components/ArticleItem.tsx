@@ -48,7 +48,11 @@ class ArticleItem extends React.Component<ArticleItemType> {
           </span>
         </div>
         <div className="more-info">
-          <span>{article.score} points</span>
+          <span>
+            {article.score === 1
+              ? `${article.score} point`
+              : `${article.score} points`}
+          </span>
           <span>by</span>
           <span>{article.by}</span>
           <span
@@ -57,7 +61,9 @@ class ArticleItem extends React.Component<ArticleItemType> {
             onClick={() => this.toDiscussPage(article.id)}
             onKeyDown={event => this.keyDownToDiscussPage(event, article.id)}
           >
-            {article.descendants} comments
+            {article.descendants
+              ? `${article.descendants} comments`
+              : "0 comments"}
           </span>
         </div>
       </>
